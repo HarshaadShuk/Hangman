@@ -204,207 +204,433 @@ svg .part.bad{stroke:var(--danger)}
 /* ============ 4. GAME DATA ============ */
 /* category|clue|answer — ordered easy to hard */
 const RAW = `
-Physics|Force that keeps planets orbiting the Sun|GRAVITY
-Astronomy|The closest star to Earth|SUN
-Animals|Largest animal on Earth|BLUE WHALE
-Geography|Largest ocean on Earth|PACIFIC
-Astronomy|Planet known for its prominent rings|SATURN
-Astronomy|The Red Planet|MARS
-Nature|Frozen water that falls from clouds|SNOW
-Human body|Organ that pumps blood|HEART
-Animals|Fastest land animal|CHEETAH
-Geography|Capital of France|PARIS
-Technology|Handheld device used to point and click|MOUSE
-Everyday|Clear liquid all life needs|WATER
-Animals|Insect that makes honey|BEE
-Nature|Large natural stream flowing to the sea|RIVER
-Geography|Continent that contains Egypt|AFRICA
-Chemistry|Gas we breathe in to live|OXYGEN
-Astronomy|Earth's natural satellite|MOON
-Animals|Tallest land animal|GIRAFFE
-Human body|Organ used to see|EYE
-Geography|Capital of Japan|TOKYO
-Everyday|The day after Sunday|MONDAY
-Nature|Colorful arc seen after rain|RAINBOW
-Animals|Black-and-white striped African animal|ZEBRA
-Astronomy|The planet we live on|EARTH
-Everyday|Frozen dessert served in a cone|ICE CREAM
-Geography|Capital of India|NEW DELHI
-Indian|National animal of India|TIGER
-Indian|Festival of lights celebrated across India|DIWALI
-Indian|Holy river that flows through Varanasi|GANGES
-Indian|White marble monument in Agra|TAJ MAHAL
-Animals|Largest bird on Earth|OSTRICH
-Human body|The bony frame of the body|SKELETON
-Technology|Portable computer you can fold shut|LAPTOP
-Math|Shape with three sides|TRIANGLE
-Math|Number of sides on a hexagon|SIX
-Nature|Tall plant with a trunk and leaves|TREE
-Nature|Mountain that erupts with molten rock|VOLCANO
-Everyday|Place where books are borrowed|LIBRARY
-Movies|Green ogre from a DreamWorks animated film|SHREK
-Animals|Hopping Australian animal with a pouch|KANGAROO
-Geography|Largest continent by area|ASIA
-Geography|Largest country by area|RUSSIA
-Chemistry|Lightest and most abundant element in the universe|HYDROGEN
-Animals|Only mammal that can truly fly|BAT
-Animals|Eight-legged creature that spins webs|SPIDER
-Human body|Largest organ of the body|SKIN
-Human body|Bone that protects the brain|SKULL
-Human body|Organs we use for breathing|LUNGS
-Geography|Highest mountain above sea level|EVEREST
-Geography|Largest hot desert in the world|SAHARA
-Geography|Capital of Italy|ROME
-Everyday|Instrument worn on the wrist to tell time|WATCH
-Everyday|Eight bits make one of these|BYTE
-Astronomy|Largest planet in the Solar System|JUPITER
-Biology|Basic unit of life|CELL
-Biology|Molecule that carries the genetic code, abbreviated|DNA
-Indian|Sport played by Sachin Tendulkar|CRICKET
-Indian|Currency of India|RUPEE
-Indian|Indian state famous for its backwaters|KERALA
-Indian|Pink City of Rajasthan|JAIPUR
-Indian|Indian space agency, abbreviated|ISRO
-Movies|Boy wizard with a lightning scar|HARRY POTTER
-Movies|Studio behind Toy Story|PIXAR
-Astronomy|Our home galaxy|MILKY WAY
-Astronomy|Icy body with a glowing tail|COMET
-Astronomy|Dwarf planet once counted as the ninth planet|PLUTO
-Astronomy|Planet farthest from the Sun|NEPTUNE
-Nature|Layer of gases surrounding Earth|ATMOSPHERE
-Nature|Process by which plants make food from sunlight|PHOTOSYNTHESIS
-Geography|Mountain range that contains Everest|HIMALAYAS
-Geography|Longest river in Africa|NILE
-Geography|Capital of Australia|CANBERRA
-Geography|River that flows through London|THAMES
-Geography|Island country just south of India|SRI LANKA
-Geography|Capital of Canada|OTTAWA
-Geography|Longest river in South America|AMAZON
-History|First President of the United States|WASHINGTON
-History|Ship that sank in 1912 after hitting an iceberg|TITANIC
-History|Explorer who sailed west from Spain in 1492|COLUMBUS
-History|Roman leader assassinated in 44 BC|JULIUS CAESAR
-Literature|Author of Romeo and Juliet|SHAKESPEARE
-Literature|Detective who lived at 221B Baker Street|SHERLOCK HOLMES
-Literature|Prince of Denmark in a Shakespeare tragedy|HAMLET
-Literature|Author of The Jungle Book|KIPLING
-Computing|Programs that run on hardware|SOFTWARE
-Computing|Global network connecting computers|INTERNET
-Computing|Number system using only 0 and 1|BINARY
-Programming|Language named after a snake|PYTHON
-Programming|A mistake in code|BUG
-Programming|Markup language for web pages, abbreviated|HTML
-Programming|Repeats code using for or while|LOOP
-Math|Number with exactly two factors, like 7|PRIME
-Math|Ratio of a circle's circumference to its diameter|PI
-Math|Polygon with eight sides|OCTAGON
-Math|Shape whose points are all equally far from its center|CIRCLE
-Indian|Leader of India's non-violent freedom struggle, called Mahatma|GANDHI
-Indian|First Prime Minister of India|NEHRU
-Indian|Poet who wrote India's national anthem|TAGORE
-Indian|Indian mission that landed near the Moon's south pole in 2023|CHANDRAYAAN
-Indian|India's first satellite, named after an ancient astronomer|ARYABHATA
-Indian|Indian epic about Rama and Sita|RAMAYANA
-Indian|Indian epic containing the Bhagavad Gita|MAHABHARATA
-Indian|Physicist who won a Nobel Prize for light scattering|RAMAN
-Movies|Film about dreams within dreams by Christopher Nolan|INCEPTION
-Movies|Bollywood film about a wrestling family starring Aamir Khan|DANGAL
-Physics|Scientist who formulated the laws of motion|NEWTON
-Physics|Scientist behind general relativity|EINSTEIN
-Physics|Bending of light as it passes between media|REFRACTION
-Physics|Particle with a negative charge|ELECTRON
-Physics|Energy of motion|KINETIC
-Physics|Unit of electrical resistance|OHM
-Physics|Temperature scale that starts at absolute zero|KELVIN
-Chemistry|Element with the symbol Au|GOLD
-Chemistry|Element with the symbol Fe|IRON
-Chemistry|Most abundant gas in Earth's atmosphere|NITROGEN
-Chemistry|A pH below 7 makes a solution this|ACIDIC
-Chemistry|Second lightest element, used in balloons|HELIUM
-Chemistry|Element with atomic number 6|CARBON
-Biology|Powerhouse of the cell|MITOCHONDRIA
-Biology|Scientist who proposed natural selection|DARWIN
-Biology|Green pigment in plants|CHLOROPHYLL
-Biology|Kingdom that includes mushrooms|FUNGI
-Human body|Smallest bones in the body are found here|EAR
-Human body|Hormone that regulates blood sugar|INSULIN
-Astronomy|Region where gravity is so strong light cannot escape|BLACK HOLE
-Astronomy|First human in space|YURI GAGARIN
-Astronomy|Space telescope launched in 1990|HUBBLE
-Astronomy|Rocky body orbiting the Sun between Mars and Jupiter|ASTEROID
-Geography|Largest island in the world|GREENLAND
-Geography|Smallest country in the world|VATICAN CITY
-Geography|Capital of Brazil|BRASILIA
-Geography|Capital of Turkey|ANKARA
-Geography|Deepest ocean trench|MARIANA TRENCH
-Geography|Deepest lake in the world|BAIKAL
-History|Mughal emperor who built the Taj Mahal|SHAH JAHAN
-History|Mauryan emperor who embraced Buddhism|ASHOKA
-History|French emperor defeated at Waterloo|NAPOLEON
-History|Ancient Greek philosopher who tutored Alexander|ARISTOTLE
-History|Mongol conqueror who founded a vast empire|GENGHIS KHAN
-History|City buried by the eruption of Vesuvius|POMPEII
-History|First artificial satellite, launched in 1957|SPUTNIK
-History|Egyptian boy king with a golden mask|TUTANKHAMUN
-Literature|Author of 1984|ORWELL
-Literature|Author of Pride and Prejudice|AUSTEN
-Literature|Homer's epic about the journey home of Odysseus|ODYSSEY
-Literature|Whale hunted by Captain Ahab|MOBY DICK
-Literature|Italian poet who wrote the Divine Comedy|DANTE
-Literature|Russian author of War and Peace|TOLSTOY
-Literature|Hindi author of Godan|PREMCHAND
-Computing|Step-by-step procedure for solving a problem|ALGORITHM
-Computing|Reusable block of code that performs a task|FUNCTION
-Programming|Language that makes web pages interactive|JAVASCRIPT
-Technology|Wireless standard named after a Danish king|BLUETOOTH
-Technology|Digital currency created by Satoshi Nakamoto|BITCOIN
-Math|Longest side of a right triangle|HYPOTENUSE
-Math|Sequence beginning 1, 1, 2, 3, 5, 8|FIBONACCI
-Math|Greek mathematician who wrote Elements|EUCLID
-Math|Branch of math dealing with rates of change|CALCULUS
-Words|Fear of heights|ACROPHOBIA
-Words|Word with the same meaning as another|SYNONYM
-Words|Comparison using like or as|SIMILE
-Words|Word formed from initial letters, like NASA|ACRONYM
-Words|Word that sounds like another but is spelled differently|HOMOPHONE
-Words|Study of the origins of words|ETYMOLOGY
-Indian|Ancient university in Bihar|NALANDA
-Indian|Indian mathematician known for the 1729 story|RAMANUJAN
-Indian|Sun Temple in Odisha|KONARK
-Indian|Longest river of peninsular India|GODAVARI
-Indian|Ancient treatise on statecraft by Chanakya|ARTHASHASTRA
-Indian|Indian state with the largest area|RAJASTHAN
-Biology|Cell division that produces gametes|MEIOSIS
-Biology|Organelle where proteins are made|RIBOSOME
-Biology|Scientist who discovered penicillin|FLEMING
-Biology|Father of genetics who studied pea plants|MENDEL
-Biology|Protein in red blood cells that carries oxygen|HEMOGLOBIN
-Biology|Proteins that help fight pathogens|ANTIBODIES
-Human body|Nerve bundle running inside the backbone|SPINAL CORD
-Chemistry|Bond formed by sharing electrons|COVALENT
-Chemistry|Substance that speeds up a reaction without being used up|CATALYST
-Chemistry|Lightest metal|LITHIUM
-Chemistry|Most electronegative element|FLUORINE
-Chemistry|Chart that organizes all the elements|PERIODIC TABLE
-Computing|Technique for scrambling data to protect it|ENCRYPTION
-Computing|British mathematician who helped break Enigma|TURING
-Computing|Last in, first out data structure|STACK
-Programming|When a function calls itself|RECURSION
-Technology|Distributed ledger behind many cryptocurrencies|BLOCKCHAIN
-Physics|Change in wave frequency from a moving source|DOPPLER
-Physics|Principle limiting how precisely position and momentum are known|UNCERTAINTY
-Physics|Scientist who won Nobel Prizes for studying radioactivity|CURIE
-Physics|Particle linked to the field that gives mass, found in 2012|HIGGS BOSON
-Astronomy|Boundary around a black hole|EVENT HORIZON
-Astronomy|Rapidly spinning neutron star that emits beams|PULSAR
-Astronomy|Nearest large galaxy to the Milky Way|ANDROMEDA
-Astronomy|Saturn's largest moon, with a thick atmosphere|TITAN
-Astronomy|Largest volcano in the Solar System|OLYMPUS MONS
-History|Treaty that ended World War One with Germany|VERSAILLES
-History|Renaissance artist who painted the Mona Lisa|LEONARDO DA VINCI
-Geography|Sea between southern Europe and northern Africa|MEDITERRANEAN
-Math|French mathematician of the famous last theorem|FERMAT
-Literature|Colombian author of One Hundred Years of Solitude|MARQUEZ
+English Literature|Who wrote Pride and Prejudice?|JANE AUSTEN
+English Literature|Who wrote Middlemarch?|GEORGE ELIOT
+English Literature|Who wrote Tess of the d'Urbervilles?|THOMAS HARDY
+English Literature|Who wrote The Picture of Dorian Gray?|OSCAR WILDE
+English Literature|Who wrote Wuthering Heights?|EMILY BRONTE
+English Literature|Who wrote Jane Eyre?|CHARLOTTE BRONTE
+English Literature|Who wrote Great Expectations?|CHARLES DICKENS
+English Literature|Who wrote David Copperfield?|CHARLES DICKENS
+English Literature|Who wrote Bleak House?|CHARLES DICKENS
+English Literature|Who wrote Vanity Fair?|WILLIAM MAKEPEACE THACKERAY
+English Literature|Who wrote The Mayor of Casterbridge?|THOMAS HARDY
+English Literature|Who wrote The Mill on the Floss?|GEORGE ELIOT
+English Literature|Who wrote A Passage to India?|E M FORSTER
+English Literature|Who wrote Mrs Dalloway?|VIRGINIA WOOLF
+English Literature|Who wrote To the Lighthouse?|VIRGINIA WOOLF
+English Literature|Who wrote Sons and Lovers?|D H LAWRENCE
+English Literature|Who wrote The Rainbow?|D H LAWRENCE
+English Literature|Who wrote Heart of Darkness?|JOSEPH CONRAD
+English Literature|Who wrote Lord Jim?|JOSEPH CONRAD
+English Literature|Who wrote The Importance of Being Earnest?|OSCAR WILDE
+English Literature|Who wrote The Waste Land?|T S ELIOT
+English Literature|Who wrote Four Quartets?|T S ELIOT
+English Literature|Who wrote The Love Song of J Alfred Prufrock?|T S ELIOT
+English Literature|Who wrote Paradise Lost?|JOHN MILTON
+English Literature|Who wrote Areopagitica?|JOHN MILTON
+English Literature|Who wrote The Faerie Queene?|EDMUND SPENSER
+English Literature|Who wrote Doctor Faustus?|CHRISTOPHER MARLOWE
+English Literature|Who wrote Volpone?|BEN JONSON
+English Literature|Who wrote The Duchess of Malfi?|JOHN WEBSTER
+English Literature|Who wrote The Canterbury Tales?|GEOFFREY CHAUCER
+English Literature|Who wrote Le Morte d'Arthur?|THOMAS MALORY
+English Literature|Who wrote Gulliver's Travels?|JONATHAN SWIFT
+English Literature|Who wrote Robinson Crusoe?|DANIEL DEFOE
+English Literature|Who wrote Pamela?|SAMUEL RICHARDSON
+English Literature|Who wrote Tom Jones?|HENRY FIELDING
+English Literature|Who wrote Tristram Shandy?|LAURENCE STERNE
+English Literature|Who wrote The Rime of the Ancient Mariner?|S T COLERIDGE
+English Literature|Who wrote Kubla Khan?|S T COLERIDGE
+English Literature|Who wrote Tintern Abbey?|WILLIAM WORDSWORTH
+English Literature|Who wrote Ode to a Nightingale?|JOHN KEATS
+English Literature|Who wrote Ode on a Grecian Urn?|JOHN KEATS
+English Literature|Who wrote Adonais?|PERCY BYSSHE SHELLEY
+English Literature|Who wrote Don Juan?|LORD BYRON
+English Literature|Who wrote In Memoriam A H H?|ALFRED TENNYSON
+English Literature|Who wrote Ulysses?|ALFRED TENNYSON
+English Literature|Who wrote The Scholar Gipsy?|MATTHEW ARNOLD
+English Literature|Who wrote Dover Beach?|MATTHEW ARNOLD
+English Literature|Who wrote Goblin Market?|CHRISTINA ROSSETTI
+English Literature|Who wrote The Second Coming?|W B YEATS
+English Literature|Who wrote Sailing to Byzantium?|W B YEATS
+English Literature|Who wrote The Portrait of the Artist as a Young Man?|JAMES JOYCE
+English Literature|Who wrote Ulysses, the modernist novel set in Dublin?|JAMES JOYCE
+English Literature|Who wrote Finnegans Wake?|JAMES JOYCE
+English Literature|Who wrote Waiting for Godot?|SAMUEL BECKETT
+English Literature|Who wrote Endgame?|SAMUEL BECKETT
+English Literature|Who wrote The Birthday Party?|HAROLD PINTER
+English Literature|Who wrote Look Back in Anger?|JOHN OSBORNE
+English Literature|Who wrote The Waste Land in 1922?|T S ELIOT
+English Literature|Who wrote The Old Man and the Sea?|ERNEST HEMINGWAY
+English Literature|Who wrote A Farewell to Arms?|ERNEST HEMINGWAY
+English Literature|Who wrote The Great Gatsby?|F SCOTT FITZGERALD
+English Literature|Who wrote The Grapes of Wrath?|JOHN STEINBECK
+English Literature|Who wrote Catch-22?|JOSEPH HELLER
+English Literature|Who wrote Beloved?|TONI MORRISON
+English Literature|Who wrote Invisible Man?|RALPH ELLISON
+English Literature|Who wrote The Sound and the Fury?|WILLIAM FAULKNER
+English Literature|Who wrote One Hundred Years of Solitude?|GABRIEL GARCIA MARQUEZ
+World Literature|Who wrote Don Quixote?|MIGUEL DE CERVANTES
+World Literature|Who wrote The Divine Comedy?|DANTE ALIGHIERI
+World Literature|Who wrote Decameron?|GIOVANNI BOCCACCIO
+World Literature|Who wrote The Prince?|NICCOLO MACHIAVELLI
+World Literature|Who wrote The Trial?|FRANZ KAFKA
+World Literature|Who wrote The Metamorphosis?|FRANZ KAFKA
+World Literature|Who wrote Crime and Punishment?|FYODOR DOSTOEVSKY
+World Literature|Who wrote The Brothers Karamazov?|FYODOR DOSTOEVSKY
+World Literature|Who wrote War and Peace?|LEO TOLSTOY
+World Literature|Who wrote Anna Karenina?|LEO TOLSTOY
+World Literature|Who wrote Madame Bovary?|GUSTAVE FLAUBERT
+World Literature|Who wrote Les Miserables?|VICTOR HUGO
+World Literature|Who wrote The Stranger?|ALBERT CAMUS
+World Literature|Who wrote The Plague?|ALBERT CAMUS
+World Literature|Who wrote Thus Spoke Zarathustra?|FRIEDRICH NIETZSCHE
+World Literature|Who wrote The Master and Margarita?|MIKHAIL BULGAKOV
+World Literature|Who wrote The Name of the Rose?|UMBERTO ECO
+World Literature|Who wrote The Leopard?|GIUSEPPE TOMASI DI LAMPEDUSA
+World Literature|Who wrote The Tin Drum?|GUNTER GRASS
+World Literature|Who wrote Blindness?|JOSE SARAMAGO
+World Literature|Who wrote The Book of Disquiet?|FERNANDO PESSOA
+World Literature|Who wrote The Aleph?|JORGE LUIS BORGES
+World Literature|Who wrote The House of the Spirits?|ISABEL ALLENDE
+World Literature|Who wrote The Unbearable Lightness of Being?|MILAN KUNDERA
+World Literature|Who wrote The Little Prince?|ANTOINE DE SAINT EXUPERY
+World Literature|Who wrote The Count of Monte Cristo?|ALEXANDRE DUMAS
+World Literature|Who wrote The Three Musketeers?|ALEXANDRE DUMAS
+World Literature|Who wrote The Red and the Black?|STENDHAL
+World Literature|Who wrote In Search of Lost Time?|MARCEL PROUST
+World Literature|Who wrote The Stranger in French as L'Etranger?|ALBERT CAMUS
+Indian Literature|Who wrote Gitanjali?|RABINDRANATH TAGORE
+Indian Literature|Who wrote The Home and the World?|RABINDRANATH TAGORE
+Indian Literature|Who wrote The Guide?|R K NARAYAN
+Indian Literature|Who wrote Malgudi Days?|R K NARAYAN
+Indian Literature|Who wrote Untouchable?|MULK RAJ ANAND
+Indian Literature|Who wrote Coolie?|MULK RAJ ANAND
+Indian Literature|Who wrote The God of Small Things?|ARUNDHATI ROY
+Indian Literature|Who wrote Midnight's Children?|SALMAN RUSHDIE
+Indian Literature|Who wrote The Inheritance of Loss?|KIRAN DESAI
+Indian Literature|Who wrote A Suitable Boy?|VIKRAM SETH
+Indian Literature|Who wrote The Shadow Lines?|AMITAV GHOSH
+Indian Literature|Who wrote Sea of Poppies?|AMITAV GHOSH
+Indian Literature|Who wrote Train to Pakistan?|KHUSHWANT SINGH
+Indian Literature|Who wrote Tamas?|BHISHAM SAHNI
+Indian Literature|Who wrote The White Tiger?|ARAVIND ADIGA
+Indian Literature|Who wrote The Palace of Illusions?|CHITRA BANERJEE DIVAKARUNI
+Indian Literature|Who wrote The Great Indian Novel?|SHASHI THAROOR
+Indian Literature|Who wrote A Fine Balance?|ROHINTON MISTRY
+Indian Literature|Who wrote The Namesake?|JHUMPA LAHIRI
+Indian Literature|Who wrote Interpreter of Maladies?|JHUMPA LAHIRI
+Indian Literature|Who wrote The Hungry Tide?|AMITAV GHOSH
+Indian Literature|Who wrote Chemmeen?|THAKAZHI SIVASANKARA PILLAI
+Indian Literature|Who wrote Randamoozham?|M T VASUDEVAN NAIR
+Indian Literature|Who wrote Oru Desathinte Katha?|S K POTTEKKATT
+Indian Literature|Who wrote Indulekha?|O CHANDU MENON
+Indian Literature|Who wrote Kundalatha?|APPUNEDUNGADI
+Indian Literature|Who wrote Marthandavarma?|C V RAMAN PILLAI
+Indian Literature|Who wrote Balyakalasakhi?|VAikom MUHAMMED BASHEER
+Indian Literature|Who wrote Pathummayude Aadu?|VAikom MUHAMMED BASHEER
+Indian Literature|Who wrote Khasakkinte Itihasam?|O V VIJAYAN
+Indian Literature|Who wrote Yakshi?|MALAYATTOOR RAMAKRISHNAN
+Indian Literature|Who wrote Godan?|PREMCHAND
+Indian Literature|Who wrote Nirmala?|PREMCHAND
+Indian Literature|Who wrote Devdas?|SARAT CHANDRA CHATTOPADHYAY
+Indian Literature|Who wrote Pather Panchali?|BIBHUTIBHUSHAN BANDYOPADHYAY
+Indian Literature|Who wrote Aranyak?|BIBHUTIBHUSHAN BANDYOPADHYAY
+Indian Literature|Who wrote Gora?|RABINDRANATH TAGORE
+Indian Literature|Who wrote Chokher Bali?|RABINDRANATH TAGORE
+Indian Literature|Who wrote Yayati?|V S KHANDEKAR
+Indian Literature|Who wrote Samskara?|U R ANANTHAMURTHY
+Indian Literature|Who wrote Tughlaq?|GIRISH KARNAD
+Indian Literature|Who wrote Hayavadana?|GIRISH KARNAD
+Indian Literature|Who wrote Final Solutions?|MAHESH DATTANI
+Indian Literature|Who wrote The Guide in English?|R K NARAYAN
+Literary Terms|What is a poem of mourning for the dead called?|ELEGY
+Literary Terms|What is a fourteen-line poem traditionally called?|SONNET
+Literary Terms|What is a poem expressing grief called?|ELEGY
+Literary Terms|What is deliberate exaggeration for effect called?|HYPERBOLE
+Literary Terms|What is a comparison using like or as called?|SIMILE
+Literary Terms|What is a comparison without like or as called?|METAPHOR
+Literary Terms|What is giving human qualities to nonhuman things called?|PERSONIFICATION
+Literary Terms|What is a contradiction in terms such as 'deafening silence'?|OXYMORON
+Literary Terms|What is a statement that appears self-contradictory but may be true?|PARADOX
+Literary Terms|What is a word imitating a sound called?|ONOMATOPOEIA
+Literary Terms|What is repetition of initial consonant sounds called?|ALLITERATION
+Literary Terms|What is repetition of vowel sounds called?|ASSONANCE
+Literary Terms|What is repetition of consonant sounds within words called?|CONSONANCE
+Literary Terms|What is an indirect reference to another work called?|ALLUSION
+Literary Terms|What is a recurring image, idea, or symbol called?|MOTIF
+Literary Terms|What is the central idea of a literary work called?|THEME
+Literary Terms|What is a story within a story called?|FRAME NARRATIVE
+Literary Terms|What is a narrator who knows everything called?|OMNISCIENT NARRATOR
+Literary Terms|What is a narrator whose account cannot be trusted called?|UNRELIABLE NARRATOR
+Literary Terms|What is a sudden realization by a character called?|ANAGNORISIS
+Literary Terms|What is a reversal of fortune in tragedy called?|PERIPETEIA
+Literary Terms|What is the emotional release produced by tragedy called?|CATHARSIS
+Literary Terms|What is a tragic flaw traditionally called?|HAMARTIA
+Literary Terms|What is a work that imitates another work humorously called?|PARODY
+Literary Terms|What is a work that deliberately imitates another style for comic effect called?|PARODY
+Literary Terms|What is satire that uses praise to expose faults called?|IRONY
+Literary Terms|What is the use of words opposite to their literal meaning called?|IRONY
+Literary Terms|What is a short moral tale often using animals called?|FABLE
+Literary Terms|What is a traditional story explaining origins or beliefs called?|MYTH
+Literary Terms|What is a long narrative poem about heroic deeds called?|EPIC
+Literary Terms|What is a short story with a supernatural or mysterious atmosphere called?|GOTHIC TALE
+Literary Terms|What is a coming-of-age narrative called?|BILDUNGSROMAN
+Literary Terms|What is a novel made of letters or documents called?|EPISTOLARY NOVEL
+Literary Terms|What is a novel about the life of a fictional character called?|BIOGRAPHICAL NOVEL
+Literary Terms|What is a brief witty saying called?|APHORISM
+Literary Terms|What is a short humorous anecdote about a person or event called?|ANECDOTE
+English Language|What is a word opposite in meaning to another word called?|ANTONYM
+English Language|What is a word similar in meaning to another word called?|SYNONYM
+English Language|What is a word that sounds like another but differs in meaning or spelling called?|HOMOPHONE
+English Language|What is a word spelled like another but with a different meaning called?|HOMOGRAPH
+English Language|What is a word formed from the initial letters of other words called?|ACRONYM
+English Language|What is a word borrowed from another language called?|LOANWORD
+English Language|What is a word with the same origin as another word called?|COGNATE
+English Language|What is the study of word origins called?|ETYMOLOGY
+English Language|What is the study of sentence structure called?|SYNTAX
+English Language|What is the study of meaning in language called?|SEMANTICS
+English Language|What is the study of language in context called?|PRAGMATICS
+English Language|What is the smallest meaningful unit of language called?|MORPHEME
+English Language|What is a word made from parts of two words called?|BLEND
+English Language|What is a newly coined word called?|NEOLOGISM
+English Language|What is an expression whose meaning cannot be inferred literally called?|IDIOM
+English Language|What is a phrase with a meaning opposite to its literal wording sometimes used humorously?|SARCASM
+English Language|What is the deliberate omission of conjunctions called?|ASYNDETON
+English Language|What is the deliberate use of many conjunctions called?|POLYSYNDETON
+English Language|What is a sentence containing all the letters of the alphabet called?|PANGRAM
+English Language|What is a word that can be typed using letters in alphabetical order called?|ALPHABETICAL WORD
+General GK|Which country is known as the Land of the Rising Sun?|JAPAN
+General GK|Which city is known as the City of Canals?|VENICE
+General GK|Which city is known as the Eternal City?|ROME
+General GK|Which country is known as the Land of a Thousand Lakes?|FINLAND
+General GK|Which country is called the Emerald Isle?|IRELAND
+General GK|Which country is known as the Land of the Midnight Sun?|NORWAY
+General GK|Which city is known as the City of Light?|PARIS
+General GK|Which is the world's largest island excluding continents?|GREENLAND
+General GK|Which is the world's largest hot desert?|SAHARA
+General GK|Which is the world's largest desert overall?|ANTARCTICA
+General GK|Which strait separates Asia from North America?|BERING STRAIT
+General GK|Which canal connects the Mediterranean Sea with the Red Sea?|SUEZ CANAL
+General GK|Which canal connects the Atlantic and Pacific oceans?|PANAMA CANAL
+General GK|Which mountain range traditionally separates Europe and Asia?|URAL MOUNTAINS
+General GK|Which river flows through Cairo?|NILE
+General GK|Which river flows through Baghdad?|TIGRIS
+General GK|Which river is traditionally associated with the ancient city of Babylon?|EUPHRATES
+General GK|Which lake is the deepest freshwater lake in the world?|LAKE BAIKAL
+General GK|Which inland sea has dramatically shrunk because of diversion of rivers?|ARAL SEA
+General GK|Which country has the most natural lakes?|CANADA
+General GK|Which city stands on the River Thames?|LONDON
+General GK|Which European capital stands on the River Danube?|BUDAPEST
+General GK|Which country is home to Machu Picchu?|PERU
+General GK|Which ancient city was buried by Mount Vesuvius?|POMPEII
+General GK|Which civilization built Machu Picchu?|INCA
+General GK|Which ancient civilization developed cuneiform writing?|SUMERIANS
+General GK|Which ancient civilization is associated with the Rosetta Stone?|EGYPTIANS
+General GK|Which ancient city was famous for its Hanging Gardens?|BABYLON
+General GK|Which ancient city was destroyed by a volcanic eruption in 79 CE?|POMPEII
+General GK|Which sea lies between Europe and Africa?|MEDITERRANEAN SEA
+General GK|Which ocean lies between Africa and Australia?|INDIAN OCEAN
+General GK|Which country has the world's longest coastline?|CANADA
+General GK|Which country completely surrounds Lesotho?|SOUTH AFRICA
+General GK|Which country is completely surrounded by Italy?|VATICAN CITY
+General GK|Which two countries share the longest international border?|CANADA AND USA
+General GK|Which is the smallest country in the world by area?|VATICAN CITY
+General GK|Which city hosted the first modern Olympic Games?|ATHENS
+General GK|Which country gifted the Statue of Liberty to the United States?|FRANCE
+General GK|Which treaty formally ended World War I between Germany and the Allies?|TREATY OF VERSAILLES
+General GK|Which international organization was founded in 1945?|UNITED NATIONS
+General GK|Where is the headquarters of the United Nations?|NEW YORK
+History|Who was the first emperor of the Maurya Empire?|CHANDRAGUPTA MAURYA
+History|Which Mauryan ruler embraced Buddhism after the Kalinga War?|ASHOKA
+History|Which ancient Indian treatise is attributed to Kautilya?|ARTHASHASTRA
+History|Who wrote the Arthashastra?|KAUTILYA
+History|Which Gupta ruler is known by the title Vikramaditya?|CHANDRAGUPTA II
+History|Which Chinese traveller visited India during Harsha's reign?|XUANZANG
+History|Who founded the Delhi Sultanate's Mamluk dynasty?|QUTBUDDIN AIBAK
+History|Who built the Qutub Minar complex's early structures?|QUTBUDDIN AIBAK
+History|Who founded the Mughal Empire in India?|BABUR
+History|Who defeated Ibrahim Lodi at the First Battle of Panipat?|BABUR
+History|Who commissioned the Taj Mahal?|SHAH JAHAN
+History|Who founded the Sikh Khalsa?|GURU GOBIND SINGH
+History|Who founded the Maratha Empire?|SHIVAJI
+History|Which battle in 1757 marked a major turning point for British power in Bengal?|BATTLE OF PLASSEY
+History|Who was the last Mughal emperor?|BAHADUR SHAH II
+History|Who led the uprising in Kanpur during the Revolt of 1857?|NANA SAHEB
+History|Who founded the Indian National Congress with others in 1885?|A O HUME
+History|Who was the first president of the Indian National Congress?|W C BONNERJEE
+History|Who partitioned Bengal in 1905?|LORD CURZON
+History|Which movement followed the 1905 partition of Bengal?|SWADESHI MOVEMENT
+History|Who founded the Home Rule League in Madras in 1916?|ANNIE BESANT
+History|Which massacre took place at Amritsar in 1919?|JALLIANWALA BAGH MASSACRE
+History|Who led the Salt March of 1930?|MAHATMA GANDHI
+History|Which movement was launched in 1942 demanding an end to British rule?|QUIT INDIA MOVEMENT
+History|Who was the first Governor-General of independent India?|LORD MOUNTBATTEN
+History|Who was the first Indian Governor-General of independent India?|C RAJAGOPALACHARI
+History|Who chaired the Drafting Committee of the Indian Constitution?|B R AMBEDKAR
+History|Who was the first President of independent India?|RAJENDRA PRASAD
+History|Who was India's first Prime Minister?|JAWAHARLAL NEHRU
+History|Which ancient university was located in present-day Bihar?|NALANDA
+History|Which ancient university was a major centre of Buddhist learning in Bengal?|VIKRAMASHILA
+History|Which empire is associated with the rock-cut caves at Ajanta?|VAKATAKA
+History|Which dynasty built the Brihadisvara Temple at Thanjavur?|CHOLA
+History|Which Chola ruler sent naval expeditions to Southeast Asia?|RAJENDRA CHOLA I
+History|Which ruler built Fatehpur Sikri as his capital?|AKBAR
+History|Which Mughal emperor abolished the jizya and followed a policy of religious tolerance?|AKBAR
+History|Which Mughal ruler reimposed the jizya in 1679?|AURANGZEB
+History|Which European power established the first printing press in India?|PORTUGUESE
+History|Which European explorer reached India by sea around the Cape of Good Hope in 1498?|VASCO DA GAMA
+History|Where did Vasco da Gama first land in India?|CALICUT
+History|Which treaty divided the New World between Spain and Portugal in 1494?|TREATY OF TORDESILLAS
+Indian GK|What is the highest civilian award of India?|BHARAT RATNA
+Indian GK|What is India's highest wartime gallantry award?|PARAM VIR CHAKRA
+Indian GK|What is India's highest peacetime gallantry award?|ASHOKA CHAKRA
+Indian GK|What is the national song of India?|VANDE MATARAM
+Indian GK|Who wrote Vande Mataram?|BANKIM CHANDRA CHATTERJEE
+Indian GK|What is the national anthem of India?|JANA GANA MANA
+Indian GK|Who composed Jana Gana Mana?|RABINDRANATH TAGORE
+Indian GK|What is the official currency of India?|INDIAN RUPEE
+Indian GK|Which state has the longest coastline in India?|GUJARAT
+Indian GK|Which Indian state has the largest area?|RAJASTHAN
+Indian GK|Which Indian state has the smallest area?|GOA
+Indian GK|Which Indian state has the highest population?|UTTAR PRADESH
+Indian GK|Which is the southernmost point of mainland India?|KANYAKUMARI
+Indian GK|Which Indian island group lies in the Arabian Sea?|LAKSHADWEEP
+Indian GK|Which Indian island group lies in the Bay of Bengal?|ANDAMAN AND NICOBAR ISLANDS
+Indian GK|Which city is known as the Pink City?|JAIPUR
+Indian GK|Which city is known as the City of Nawabs?|LUCKNOW
+Indian GK|Which city is known as the City of Joy?|KOLKATA
+Indian GK|Which city is known as the Silicon Valley of India?|BENGALURU
+Indian GK|Which city is known as the Queen of the Arabian Sea?|KOCHI
+Indian GK|Which Indian classical dance originated in Kerala?|KATHAKALI
+Indian GK|Which Indian classical dance is associated with Tamil Nadu?|BHARATANATYAM
+Indian GK|Which classical dance form originated in Odisha?|ODISSI
+Indian GK|Which classical dance form originated in Andhra Pradesh?|KUCHIPUDI
+Indian GK|Which classical dance form is associated with Uttar Pradesh?|KATHAK
+Indian GK|Which classical dance form is associated with Manipur?|MANIPURI
+Indian GK|Which classical music tradition is dominant in North India?|HINDUSTANI MUSIC
+Indian GK|Which classical music tradition is dominant in South India?|CARNATIC MUSIC
+Indian GK|Who is traditionally regarded as the father of Carnatic music?|PURANDARA DASA
+Indian GK|Which instrument is strongly associated with Ravi Shankar?|SITAR
+Indian GK|Which instrument is associated with Ustad Bismillah Khan?|SHEHNAI
+Indian GK|Which Indian festival is known as the festival of lights?|DIWALI
+Indian GK|Which harvest festival is strongly associated with Kerala?|ONAM
+Indian GK|Which festival celebrates the Bengali New Year?|POILA BOISHAKH
+Indian GK|Which festival is associated with the harvest in Punjab?|BAISAKHI
+Culture & Arts|Who painted the Mona Lisa?|LEONARDO DA VINCI
+Culture & Arts|Who painted The Starry Night?|VINCENT VAN GOGH
+Culture & Arts|Who painted Guernica?|PABLO PICASSO
+Culture & Arts|Who painted The Persistence of Memory?|SALVADOR DALI
+Culture & Arts|Who sculpted David?|MICHELANGELO
+Culture & Arts|Who sculpted The Thinker?|AUGUSTE RODIN
+Culture & Arts|Who composed The Four Seasons?|ANTONIO VIVALDI
+Culture & Arts|Who composed the Ninth Symphony?|LUDWIG VAN BEETHOVEN
+Culture & Arts|Who composed The Magic Flute?|WOLFGANG AMADEUS MOZART
+Culture & Arts|Who composed The Marriage of Figaro?|WOLFGANG AMADEUS MOZART
+Culture & Arts|Who composed Swan Lake?|PYOTR TCHAIKOVSKY
+Culture & Arts|Who composed The Nutcracker?|PYOTR TCHAIKOVSKY
+Culture & Arts|Which architect designed the Guggenheim Museum in Bilbao?|FRANK GEHRY
+Culture & Arts|Which architectural style is associated with pointed arches and flying buttresses?|GOTHIC
+Culture & Arts|Which artistic movement is associated with Monet and Renoir?|IMPRESSIONISM
+Culture & Arts|Which movement is associated with Picasso and Braque?|CUBISM
+Culture & Arts|Which movement was associated with Salvador Dali?|SURREALISM
+Culture & Arts|Which art movement preceded Impressionism and emphasized light and everyday life?|REALISM
+Culture & Arts|Which museum houses the Mona Lisa?|LOUVRE
+Culture & Arts|Which city is home to the Prado Museum?|MADRID
+Culture & Arts|Which city is home to the Uffizi Gallery?|FLORENCE
+Culture & Arts|Which theatre is strongly associated with Shakespeare?|GLOBE THEATRE
+Culture & Arts|Who founded the Royal Shakespeare Company?|PETER HALL
+Culture & Arts|Which ancient Greek theatre festival honoured Dionysus?|DIONYSIA
+Culture & Arts|What is the Japanese art of paper folding called?|ORIGAMI
+Culture & Arts|What is the Japanese traditional theatre known for elaborate makeup and costumes?|KABUKI
+Culture & Arts|What is the traditional Japanese form of dramatic theatre with masks?|NOH
+Culture & Arts|Which city is famous for the annual Carnival in Brazil?|RIO DE JANEIRO
+Culture & Arts|Which country is associated with the traditional dance flamenco?|SPAIN
+Culture & Arts|Which country is associated with the tango?|ARGENTINA
+Culture & Arts|Which country is traditionally associated with the waltz?|AUSTRIA
+Culture & Arts|Which ancient Greek order has plain capitals?|DORIC
+Culture & Arts|Which ancient Greek order has scroll-like volutes?|IONIC
+Culture & Arts|Which ancient Greek order has elaborate acanthus-leaf capitals?|CORINTHIAN
+Culture & Arts|Which epic is traditionally attributed to Homer?|ODYSSEY
+Culture & Arts|Which other Homeric epic tells of the Trojan War?|ILIAD
+Culture & Arts|Who is traditionally credited with compiling the Panchatantra?|VISHNU SHARMA
+Culture & Arts|Which collection of Middle Eastern tales includes Aladdin and Ali Baba?|ONE THOUSAND AND ONE NIGHTS
+Culture & Arts|What is the traditional Japanese comic storytelling form performed by a solo narrator?|RAKUGO
+Culture & Arts|Which board game originated in ancient India and is an ancestor of chess?|CHATURANGA
+Culture & Arts|Which country is traditionally credited with the invention of chess's early ancestor?|INDIA
+Politics & Civics|What is the supreme law of India?|CONSTITUTION
+Politics & Civics|How many Fundamental Rights are currently guaranteed by the Indian Constitution?|SIX
+Politics & Civics|Which part of the Indian Constitution contains Fundamental Rights?|PART THREE
+Politics & Civics|Which part contains the Directive Principles of State Policy?|PART FOUR
+Politics & Civics|Which article guarantees equality before law?|ARTICLE FOURTEEN
+Politics & Civics|Which article protects freedom of speech and expression?|ARTICLE NINETEEN
+Politics & Civics|Which article is associated with the Right to Constitutional Remedies?|ARTICLE THIRTY TWO
+Politics & Civics|Who called Article 32 the heart and soul of the Constitution?|B R AMBEDKAR
+Politics & Civics|What is the lower house of the Indian Parliament called?|LOK SABHA
+Politics & Civics|What is the upper house of the Indian Parliament called?|RAJYA SABHA
+Politics & Civics|Who presides over the Rajya Sabha?|VICE PRESIDENT
+Politics & Civics|Who presides over the Lok Sabha?|SPEAKER
+Politics & Civics|Which body conducts elections in India?|ELECTION COMMISSION
+Politics & Civics|Which constitutional body audits government accounts in India?|CAG
+Politics & Civics|What does CAG stand for?|COMPTROLLER AND AUDITOR GENERAL
+Politics & Civics|Which body recommends the distribution of tax revenues between Union and states?|FINANCE COMMISSION
+Politics & Civics|What is the minimum age for voting in India?|EIGHTEEN
+Politics & Civics|What is the term of a Rajya Sabha member?|SIX YEARS
+Politics & Civics|What is the maximum strength of the Rajya Sabha under the Constitution?|TWO HUNDRED FIFTY
+Politics & Civics|What is the maximum strength of the Lok Sabha under the Constitution?|FIVE HUNDRED FIFTY
+Politics & Civics|Which country has a parliamentary system at the national level and a constitutional monarchy?|UNITED KINGDOM
+Politics & Civics|Which document begins with the words 'We the People'?|US CONSTITUTION
+Politics & Civics|Which chamber is the upper house of the US Congress?|SENATE
+Politics & Civics|Which chamber is the lower house of the US Congress?|HOUSE OF REPRESENTATIVES
+Politics & Civics|What is the principle that government powers are divided among branches called?|SEPARATION OF POWERS
+Politics & Civics|What is government by the people called?|DEMOCRACY
+Politics & Civics|What is rule by a king or queen called?|MONARCHY
+Politics & Civics|What is rule by a small group called?|OLIGARCHY
+Politics & Civics|What is rule by a single person with absolute power called?|AUTOCRACY
+Politics & Civics|Which international court is based in The Hague and tries individuals for genocide and war crimes?|INTERNATIONAL CRIMINAL COURT
+Politics & Civics|Which court settles disputes between states under international law?|INTERNATIONAL COURT OF JUSTICE
+World History|Which civilization developed democracy in Athens?|ANCIENT GREEKS
+World History|Who was the first emperor of Rome?|AUGUSTUS
+World History|Who crossed the Rubicon in 49 BCE?|JULIUS CAESAR
+World History|Who wrote The Republic?|PLATO
+World History|Who taught Alexander the Great?|ARISTOTLE
+World History|Which city was the capital of the Byzantine Empire?|CONSTANTINOPLE
+World History|Which empire was ruled by Justinian I?|BYZANTINE EMPIRE
+World History|Which event began in France in 1789?|FRENCH REVOLUTION
+World History|Which prison-fortress was stormed on 14 July 1789?|BASTILLE
+World History|Who became emperor of France in 1804?|NAPOLEON BONAPARTE
+World History|Which battle ended Napoleon's rule in 1815?|WATERLOO
+World History|Which revolution began in Britain with major industrialization?|INDUSTRIAL REVOLUTION
+World History|Which document declared the American colonies independent in 1776?|DECLARATION OF INDEPENDENCE
+World History|Who was the principal author of the US Declaration of Independence?|THOMAS JEFFERSON
+World History|Which Russian revolution brought the Bolsheviks to power?|OCTOBER REVOLUTION
+World History|Who led the Bolshevik Revolution?|VLADIMIR LENIN
+World History|Which treaty created the League of Nations framework after World War I?|TREATY OF VERSAILLES
+World History|Which conference is associated with the partition of Africa among European powers?|BERLIN CONFERENCE
+World History|Who was the British prime minister during much of World War II?|WINSTON CHURCHILL
+World History|Which city was divided by a wall during the Cold War?|BERLIN
+World History|Which wall fell in 1989, symbolizing the end of the Cold War era?|BERLIN WALL
+World History|Which two superpowers dominated the Cold War?|USA AND USSR
+World History|What was the military alliance led by the Soviet Union called?|WARSAW PACT
+World History|What was the Western military alliance formed in 1949 called?|NATO
+World History|Which conference in 1945 planned the postwar international order?|YALTA CONFERENCE
+World History|Which ancient civilization built the Colosseum?|ROMANS
+World History|Which empire built the Hagia Sophia under Justinian?|BYZANTINE EMPIRE
+World History|Which medieval document limited the power of the English king in 1215?|MAGNA CARTA
+World History|Which English king accepted Magna Carta?|KING JOHN
+World History|Which plague devastated Europe in the fourteenth century?|BLACK DEATH
+World History|Which empire was ruled by Genghis Khan?|MONGOL EMPIRE
+World History|Which city was the capital of the Aztec Empire?|TENOCHTITLAN
+World History|Which civilization built Tenochtitlan?|AZTECS
+World History|Which civilization built Chichen Itza?|MAYA
+World History|Which African kingdom became famous for Mansa Musa?|MALI EMPIRE
+World History|Which ancient city was a major Phoenician centre in North Africa?|CARTHAGE
+World History|Who was the Carthaginian general who crossed the Alps?|HANNIBAL
+World History|Which dynasty built much of the Great Wall's surviving structure?|MING DYNASTY
+World History|Which Chinese philosopher emphasized filial piety and social harmony?|CONFUCIUS
+World History|Who wrote The Art of War?|SUN TZU
+World History|Which civilization created the Olympic Games in antiquity?|ANCIENT GREEKS
 `;
 const BASE = RAW.trim().split("\n").map((l, i) => { const [category, question, answer] = l.split("|"); return { category, question, answer: answer.trim().toUpperCase(), tier: Math.min(4, Math.floor(i / 50)) }; });
 let LEVELS = [];
